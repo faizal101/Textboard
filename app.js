@@ -14,7 +14,8 @@ const con = mysql.createConnection({
 
 con.connect(function (err) {
     if (err) throw err;
-    console.log("Connected to Database.")
+    console.log("Connected to Database.");
+    con.query('USE textboard;');
 });
 
 app.use(express.urlencoded({extended: false}));
@@ -31,5 +32,11 @@ app.use(express.static("public"));
 // });
 
 app.post('/submit', (req, res) => {
-    console.log(req.body.msgBox)
+    console.log(req.body.msgBox);
+    const date = new Date();
+    const statement = `INSERT INTO posts (postText, postDate) VALUES ('${req.body.msgBox}', '${date.toDateString()}');`
+    con.query(statement, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+    })
 })
