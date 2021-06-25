@@ -17,6 +17,9 @@ con.connect(function (err) {
     console.log("Connected to Database.")
 });
 
+app.use(express.urlencoded({extended: false}));
+
+
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
@@ -27,6 +30,6 @@ app.use(express.static("public"));
 //     res.send('Hello World!')
 // });
 
-// app.post('/submit', (req, res) => {
-
-// })
+app.post('/submit', (req, res) => {
+    console.log(req.body.msgBox)
+})
