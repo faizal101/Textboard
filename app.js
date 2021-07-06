@@ -34,9 +34,19 @@ app.use(express.static("public"));
 app.post('/submit', (req, res) => {
     console.log(req.body.msgBox);
     const date = new Date();
-    const statement = `INSERT INTO posts (postText, postDate) VALUES ('${req.body.msgBox}', '${date.toDateString()}');`
+    const statement = `INSERT INTO posts (postText, postDate) VALUES ('${req.body.msgBox}', '${date.toDateString()}');`;
+    con.query(statement, function (err) {
+        if (err) throw err;
+    });
+    res.status(200);
+    getPost();
+});
+
+function getPost() {
+    const statement = "SELECT postText, postDate FROM posts";
     con.query(statement, function (err, result) {
         if (err) throw err;
-        console.log(result);
-    })
-})
+        // console.log(result);
+        result.forEach(x => console.log(x.postText));
+    });
+};
