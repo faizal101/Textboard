@@ -16,6 +16,7 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Connected to Database.");
     con.query('USE textboard;');
+    // getPost();
 });
 
 app.use(express.urlencoded({extended: false}));
@@ -39,14 +40,15 @@ app.post('/submit', (req, res) => {
         if (err) throw err;
     });
     res.status(200);
-    getPost();
+    getPost()
 });
 
 function getPost() {
-    const statement = "SELECT postText, postDate FROM posts";
+    const statement = `SELECT JSON_OBJECT('text', postText, 'date', postDate) FROM posts`;
     con.query(statement, function (err, result) {
         if (err) throw err;
-        // console.log(result);
-        result.forEach(x => console.log(x.postText));
+        console.log(result[0]);
+        // result.forEach(x => posts.push(x.postText, x.postDate));
+        // console.log(posts);
     });
 };
