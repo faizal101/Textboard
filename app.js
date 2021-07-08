@@ -16,7 +16,6 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Connected to Database.");
     con.query('USE textboard;');
-    // getPost();
 });
 
 app.use(express.urlencoded({extended: false}));
@@ -26,11 +25,32 @@ app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-// });
+app.get('/', (req, res) => {
+    // res.send('Hello World!')
+    const statement = "SELECT postText, postDate FROM posts";
+    let queryResult;
+    con.query(statement, function (err, result) {
+        if (err) throw err;
+        // console.log(result)
+
+        // result = JSON.stringify(result);
+        // console.log(JSON.parse(JSON.stringify(result)));
+        console.log("__________________");
+        console.log(JSON.stringify(result));
+        console.log("__________________");
+        queryResult = result;
+        
+        console.log("--------------");
+        console.log(queryResult);
+        console.log("--------------");
+        res.send(queryResult);
+    });
+    // console.log(statement);
+    
+    
+});
 
 app.post('/submit', (req, res) => {
     console.log(req.body.msgBox);
@@ -40,15 +60,4 @@ app.post('/submit', (req, res) => {
         if (err) throw err;
     });
     res.status(200);
-    getPost()
 });
-
-function getPost() {
-    const statement = `SELECT JSON_OBJECT('text', postText, 'date', postDate) FROM posts`;
-    con.query(statement, function (err, result) {
-        if (err) throw err;
-        console.log(result[0]);
-        // result.forEach(x => posts.push(x.postText, x.postDate));
-        // console.log(posts);
-    });
-};
