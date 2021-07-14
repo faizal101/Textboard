@@ -25,9 +25,9 @@ app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
 
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
-app.get('/', (req, res) => {
+app.get('/get', (req, res) => {
     // res.send('Hello World!')
     const statement = "SELECT postText, postDate FROM posts";
     let queryResult;
@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
         console.log("--------------");
         console.log(queryResult);
         console.log("--------------");
-        res.send(queryResult);
+        res.status(200).send(queryResult);
     });
     // console.log(statement);
     
