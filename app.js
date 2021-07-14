@@ -29,7 +29,7 @@ app.use(express.static("public"));
 
 app.get('/get', (req, res) => {
     // res.send('Hello World!')
-    const statement = "SELECT postText, postDate FROM posts";
+    const statement = "SELECT postID, postText, postDate FROM posts";
     let queryResult;
     con.query(statement, function (err, result) {
         if (err) throw err;
