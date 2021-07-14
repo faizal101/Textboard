@@ -59,5 +59,5 @@ app.post('/submit', (req, res) => {
     con.query(statement, function (err) {
         if (err) throw err;
     });
-    res.status(200);
+    res.status(200).redirect('back');
 });
