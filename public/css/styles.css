@@ -3,12 +3,54 @@
 /* applies to screens smaller than 500px (first breakpoint) */
 /* and above unless overwritten below */
 
+:root {
+  --font-family-list: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
     background: #fcc;
+    font-family: var(--font-family-list);
   } 
-  
-  
-  
+
+div[id^="post-no-"] {
+
+  display: grid;
+  grid-template-rows: 15% auto auto;
+  padding-left: 30px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  width: 50%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.date {
+  font-size: 14px;
+  font-weight: 100;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 5% 5%;
+  font-size: 16;
+  font-weight: 300;
+}
+
+form {
+  width: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+p {
+  margin-bottom: 0px;
+}
+
   /* TABLET STYLES */
   
   @media screen and (min-width: 500px) {

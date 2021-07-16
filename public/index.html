@@ -4,20 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Textboard</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:700|Roboto:100,300,400&display=swap">
 </head>
 <body>
 
   <h2>A simple textboard showcasing POST/GET, and database usage.</h2>
   <h4>Portfolio 1/6</h4>
 
-  <form action="/submit" method="POST"> 
+  <form action="/submit", method="POST"> 
       <textarea id="msgBox", name="msgBox" rows="8" cols="50">Enter your message here!</textarea>
       <br>
       <input type="submit" value ="Submit">
   </form>
   <br><br>
-  <div id="posts">beep</div>
+  <div id="posts"></div>
 
 <script src="js/scripts.js"></script>
 </body>

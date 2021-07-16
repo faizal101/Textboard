@@ -16,6 +16,10 @@ function formatPosts(post) {
     document.getElementById("posts").innerHTML +=
     `<div id="post-no-${post.postID}"></div>`
     document.getElementById(`post-no-${post.postID}`).innerHTML = 
-    `<p>${post.postText}</p>
-    <p>Posted on: ${post.postDate}</p>`;
+    `<div class="date"><p>Posted on: ${post.postDate}</p></div>
+    <div><p>${post.postText}</p></div>
+    <div class="footer">
+    <div>edit</div>
+    <div>delete</div>
+    </div>`;
 };
