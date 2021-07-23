@@ -7,19 +7,31 @@ getPosts()
 let posts;
 
 async function getPosts() {
-    const response = await fetch('/get');
-    return await response.json();
+  const response = await fetch('/get');
+  return await response.json();
+}
+
+async function deletePost() {
+  // const postNo = document.querySelector('#post-no-1');
+  // console.log(postNo.dataset.postno)
+  const resonse = await fetch('/delete');
+  return await response.json();
 }
 
 
 function formatPosts(post) {
-    document.getElementById("posts").innerHTML +=
-    `<div id="post-no-${post.postID}"></div>`
-    document.getElementById(`post-no-${post.postID}`).innerHTML = 
-    `<div class="date"><p>Posted on: ${post.postDate}</p></div>
-    <div><p>${post.postText}</p></div>
-    <div class="footer">
-    <div>edit</div>
-    <div>delete</div>
-    </div>`;
+  document.getElementById("posts").innerHTML +=
+  `<div id="post-no-${post.postID}" data-post-no="${post.postID}"></div>`
+  document.getElementById(`post-no-${post.postID}`).innerHTML =
+  `<div class="date"><p>Posted on: ${post.postDate}</p></div>
+  <div><p>${post.postText}</p></div>
+  <div class="footer">
+  <div>
+  <button id="edit" type="button">edit</button
+  </div>
+  <div class="delete" id="delete">delete</div>
+  </div>`;
+  let foo = document.getElementById(`post-no-${post.postID}`).attributes["data-post-no"];
+  console.log(foo.value);
+  document.getElementById("edit").onclick=deletePost();
 };

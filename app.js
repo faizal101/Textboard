@@ -45,6 +45,8 @@ app.get('/get', (req, res) => {
         console.log("--------------");
         console.log(queryResult);
         console.log("--------------");
+        
+        console.log(req.body.query)
         res.status(200).send(queryResult);
     });
     // console.log(statement);
@@ -60,4 +62,10 @@ app.post('/submit', (req, res) => {
         if (err) throw err;
     });
     res.status(200).redirect('back');
+});
+
+app.get('/delete', (req, res) => {
+    console.log("the thing happened.")
+    console.log(req.body.data)
+    res.status(200);
 });
