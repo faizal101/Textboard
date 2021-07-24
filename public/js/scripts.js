@@ -29,9 +29,22 @@ function formatPosts(post) {
   <div>
   <button id="edit" type="button">edit</button
   </div>
-  <div class="delete" id="delete">delete</div>
+  <div class="delete">delete</div>
   </div>`;
-  let foo = document.getElementById(`post-no-${post.postID}`).attributes["data-post-no"];
-  console.log(foo.value);
-  document.getElementById("edit").onclick=deletePost();
+  // let foo = document.getElementById(`post-no-${post.postID}`).attributes["data-post-no"];
+  // console.log(foo.value);
+  // document.getElementById("edit").onclick=deletePost();
 };
+
+function deletePosts() {
+  let elements = document.getElementsByClassName("delete");
+  let myFunc = function() {
+    console.log("the thing should happen")
+  }
+
+  Array.from(elements).forEach(element => {
+    element.addEventListener('click', myFunc);
+  })
+}
+
+deletePosts();
