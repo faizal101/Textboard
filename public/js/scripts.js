@@ -2,7 +2,8 @@ getPosts()
   .then(data => data.forEach(p => {
     formatPosts(p)
     //   document.getElementById("posts").innerHTML += p.postText;
-  }));
+  }))
+  .finally(() => deletePosts())
 
 let posts;
 
@@ -34,37 +35,17 @@ function formatPosts(post) {
   // let foo = document.getElementById(`post-no-${post.postID}`).attributes["data-post-no"];
   // console.log(foo.value);
   // document.getElementById("edit").onclick=deletePost();
+  
 };
 
 function deletePosts() {
   let elements = document.getElementsByClassName("delete");
-  console.log(elements);
-  
-  // let myFunc = function() {
-  //   console.log("the thing should happen")
-  // }
-
-  /**
-   * From the Docs:
-   * - The getElementsByClassName method of Document interface returns an array-like object of all child elements which have all of the given class name(s). 
-   * - The HTMLCollection interface represents a generic collection (array-like object similar to arguments)
-   * - The Array.from() static method creates a new, shallow-copied Array instance from an array-like or iterable object.
-   * - `console.log(elements)` confirms that it's a HTMLCollection []
-   *    - So it's an array-like object
-   * - The Array.from() static method creates a new, shallow-copied Array instance from an array-like or iterable object.
-   * 
-   */
-  console.log("this is just before the array."); // It prints
+  let myFunc = function() {
+    console.log("the thing should happen")
+  }
 
   Array.from(elements).forEach(element => {
-    console.log(element); // not printing *anything*
-    console.log("this is inside the array."); // this is not printing either  // so this means that this Array is not working.
-    // console.log(element);
-    // element.addEventListener('click', myFunc);
+    element.addEventListener('click', myFunc);
   })
-  console.log("this is right after the array."); // It prints
-
-  console.log(Array.from(elements)); // empty Array
 }
 
-deletePosts();
