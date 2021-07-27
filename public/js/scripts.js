@@ -41,7 +41,8 @@ function formatPosts(post) {
 function deletePosts() {
   let elements = document.getElementsByClassName("delete");
   let myFunc = function() {
-    console.log("the thing should happen")
+    const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+    console.log(postNo); 
   }
 
   Array.from(elements).forEach(element => {
