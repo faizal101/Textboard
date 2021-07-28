@@ -26,6 +26,7 @@ app.listen(port, () => {
 });
 
 app.use(express.static("public"));
+app.use(express.json());
 
 app.get('/get', (req, res) => {
     // res.send('Hello World!')
@@ -64,8 +65,8 @@ app.post('/submit', (req, res) => {
     res.status(200).redirect('back');
 });
 
-app.get('/delete', (req, res) => {
+app.post('/delete', (req, res) => {
     console.log("the thing happened.")
-    console.log(req.body.data)
+    console.log(req.body);
     res.status(200);
 });

@@ -12,10 +12,12 @@ async function getPosts() {
   return await response.json();
 }
 
-async function deletePost() {
-  // const postNo = document.querySelector('#post-no-1');
-  // console.log(postNo.dataset.postno)
-  const resonse = await fetch('/delete');
+async function deletePost(post) {
+  console.log(post)
+  const response = await fetch('/delete', {
+    method: "POST",
+    body: JSON.stringify({post}),
+  });
   return await response.json();
 }
 
@@ -40,13 +42,18 @@ function formatPosts(post) {
 
 function deletePosts() {
   let elements = document.getElementsByClassName("delete");
-  let myFunc = function() {
+  let getPostNo = function() {
     const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
-    console.log(postNo); 
+    // console.log(postNo);
+    deletePost(postNo);
   }
 
   Array.from(elements).forEach(element => {
-    element.addEventListener('click', myFunc);
+    element.addEventListener('click', getPostNo);
   })
 }
 
+// function foo(div) {
+//   // const postNo = div.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+//     console.log(div); 
+// }
