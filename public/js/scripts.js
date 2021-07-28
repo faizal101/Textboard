@@ -45,15 +45,18 @@ function formatPosts(post) {
 
 function deletePosts() {
   let elements = document.getElementsByClassName("delete");
-  let getPostNo = function() {
+  let deletePostNo = function() {
     const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     // console.log(postNo);
-    deletePost(postNo);
-    document.getElementById(`post-no-${postNo}`).remove();
+    let result = confirm("Are you sure you want to delete this post?")
+    if (result) {
+      deletePost(postNo);
+      document.getElementById(`post-no-${postNo}`).remove();
+    }
   }
 
   Array.from(elements).forEach(element => {
-    element.addEventListener('click', getPostNo);
+    element.addEventListener('click', deletePostNo);
   })
 }
 
