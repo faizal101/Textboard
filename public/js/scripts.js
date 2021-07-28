@@ -16,7 +16,10 @@ async function deletePost(post) {
   console.log(post)
   const response = await fetch('/delete', {
     method: "POST",
-    body: JSON.stringify({post}),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({post})
   });
   return await response.json();
 }
