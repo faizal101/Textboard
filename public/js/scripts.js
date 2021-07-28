@@ -49,6 +49,7 @@ function deletePosts() {
     const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     // console.log(postNo);
     deletePost(postNo);
+    document.getElementById(`post-no-${postNo}`).remove();
   }
 
   Array.from(elements).forEach(element => {
