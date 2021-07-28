@@ -67,6 +67,9 @@ app.post('/submit', (req, res) => {
 
 app.post('/delete', (req, res) => {
     console.log("the thing happened.")
-    console.log(req.body);
+    const statement = `DELETE FROM posts WHERE postID = ${req.body.post}`
+    con.query(statement, function (err) {
+        if (err) throw err;
+    })
     res.status(200);
 });
