@@ -53,3 +53,8 @@ app.post('/delete', (req, res) => {
     })
     res.status(200);
 });
+
+app.post('/edit', (req, res) => {
+    console.log(req.body.post);
+    res.status(200);
+})

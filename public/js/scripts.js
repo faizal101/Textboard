@@ -23,7 +23,6 @@ async function deletePost(post) {
   return await response.json();
 }
 
-
 function formatPosts(post) {
   document.getElementById("posts").innerHTML +=
   `<div id="post-no-${post.postID}" data-post-no="${post.postID}"></div>`
@@ -31,21 +30,21 @@ function formatPosts(post) {
   `<div class="date"><p>Posted on: ${post.postDate}</p></div>
   <div><p>${post.postText}</p></div>
   <div class="footer">
-  <div>
-  <button id="edit" type="button">edit</button
+  <div class="edit">edit</div>
   </div>
   <div class="delete">delete</div>
-  </div>`;  
+  </div>`;
 };
 
 function addEventHandlers() {
   addDeletePostsHandler();
+  addEditPostsHandler();
 }
 
 function addDeletePostsHandler() {
   let elements = document.getElementsByClassName("delete");
   let deletePostNo = function() {
-    const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+    const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     let result = confirm("Are you sure you want to delete this post?")
     if (result) {
       deletePost(postNo);
@@ -55,5 +54,17 @@ function addDeletePostsHandler() {
 
   Array.from(elements).forEach(element => {
     element.addEventListener('click', deletePostNo);
+  })
+}
+
+function addEditPostsHandler() {
+  let elements = document.getElementsByClassName("edit");
+  let editPostNo = function() {
+    const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+    console.log(postNo);
+  }
+
+  Array.from(elements).forEach(element => {
+    element.addEventListener('click', editPostNo);
   })
 }
