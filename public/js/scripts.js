@@ -1,9 +1,8 @@
 getPosts()
   .then(data => data.forEach(p => {
     formatPosts(p)
-    //   document.getElementById("posts").innerHTML += p.postText;
   }))
-  .finally(() => deletePosts())
+  .finally(() => addEventHandlers())
 
 let posts;
 
@@ -36,18 +35,17 @@ function formatPosts(post) {
   <button id="edit" type="button">edit</button
   </div>
   <div class="delete">delete</div>
-  </div>`;
-  // let foo = document.getElementById(`post-no-${post.postID}`).attributes["data-post-no"];
-  // console.log(foo.value);
-  // document.getElementById("edit").onclick=deletePost();
-  
+  </div>`;  
 };
 
-function deletePosts() {
+function addEventHandlers() {
+  addDeletePostsHandler();
+}
+
+function addDeletePostsHandler() {
   let elements = document.getElementsByClassName("delete");
   let deletePostNo = function() {
     const postNo = this.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
-    // console.log(postNo);
     let result = confirm("Are you sure you want to delete this post?")
     if (result) {
       deletePost(postNo);
@@ -59,8 +57,3 @@ function deletePosts() {
     element.addEventListener('click', deletePostNo);
   })
 }
-
-// function foo(div) {
-//   // const postNo = div.parentElement.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
-//     console.log(div); 
-// }

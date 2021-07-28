@@ -29,30 +29,11 @@ app.use(express.static("public"));
 app.use(express.json());
 
 app.get('/get', (req, res) => {
-    // res.send('Hello World!')
     const statement = "SELECT postID, postText, postDate FROM posts";
-    let queryResult;
     con.query(statement, function (err, result) {
         if (err) throw err;
-        // console.log(result)
-
-        // result = JSON.stringify(result);
-        // console.log(JSON.parse(JSON.stringify(result)));
-        console.log("__________________");
-        console.log(JSON.stringify(result));
-        console.log("__________________");
-        queryResult = result;
-        
-        console.log("--------------");
-        console.log(queryResult);
-        console.log("--------------");
-        
-        console.log(req.body.query)
-        res.status(200).send(queryResult);
+        res.status(200).send(result);
     });
-    // console.log(statement);
-    
-    
 });
 
 app.post('/submit', (req, res) => {
@@ -66,7 +47,7 @@ app.post('/submit', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-    const statement = `DELETE FROM posts WHERE postID = ${req.body.post}`
+    const statement = `DELETE FROM posts WHERE postID = ${req.body.post}`;
     con.query(statement, function (err) {
         if (err) throw err;
     })
