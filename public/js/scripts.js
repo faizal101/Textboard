@@ -37,14 +37,15 @@ function formatPosts(post) {
 };
 
 function addEventHandlers() {
-  addDeletePostsHandler();
+  
   addEditPostsHandler();
+  addDeletePostsHandler();
 }
 
 function addDeletePostsHandler() {
   let elements = document.getElementsByClassName("delete");
   let deletePostNo = function() {
-    const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+    const postNo = this.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     let result = confirm("Are you sure you want to delete this post?")
     if (result) {
       deletePost(postNo);
