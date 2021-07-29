@@ -37,7 +37,6 @@ app.get('/get', (req, res) => {
 });
 
 app.post('/submit', (req, res) => {
-    console.log(req.body.msgBox);
     const date = new Date();
     const statement = `INSERT INTO posts (postText, postDate) VALUES ('${req.body.msgBox}', '${date.toDateString()}');`;
     con.query(statement, function (err) {
@@ -55,8 +54,6 @@ app.post('/delete', (req, res) => {
 });
 
 app.post('/edit', (req, res) => {
-    console.log(req.body.postNo);
-    console.log(req.body.newMsg);
     const statement = `UPDATE posts SET postText = '${req.body.newMsg}' WHERE postID = ${req.body.postNo}`;
     con.query(statement, function (err) {
         if (err) throw err

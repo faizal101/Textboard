@@ -12,7 +12,6 @@ async function getPosts() {
 }
 
 async function deletePost(post) {
-  console.log(post)
   const response = await fetch('/delete', {
     method: "POST",
     headers: {
@@ -24,7 +23,6 @@ async function deletePost(post) {
 }
 
 async function editPost(postNo, newMsg) {
-  console.log(`post:${postNo}, msg:${newMsg}`)
   const response = await fetch('/edit', {
     method: "POST",
     headers: {
@@ -32,6 +30,7 @@ async function editPost(postNo, newMsg) {
     },
     body: JSON.stringify({postNo, newMsg})
   });
+  return await response.json();
 }
 
 function formatPosts(post) {
@@ -42,7 +41,6 @@ function formatPosts(post) {
   <div><p id="msg-${post.postID}">${post.postText}</p></div>
   <div class="footer">
   <div class="edit">edit</div>
-  </div>
   <div class="delete">delete</div>
   </div>`;
 };
@@ -56,7 +54,7 @@ function addEventHandlers() {
 function addDeletePostsHandler() {
   let elements = document.getElementsByClassName("delete");
   let deletePostNo = function() {
-    const postNo = this.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
+    const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     let result = confirm("Are you sure you want to delete this post?")
     if (result) {
       deletePost(postNo);
@@ -75,18 +73,15 @@ function addEditPostsHandler() {
     const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     const msg = document.getElementById(`msg-${postNo}`).parentElement;
     if (this.innerHTML == "edit") {
-      console.log(postNo);
       msg.contentEditable = 'true';
       msg.style="border:1px; border-style:solid; border-color:#000000;"
-      // $(`post-no-${postNo}.editable`).live;
       this.innerHTML = "save";
     } else {
+      msg.contentEditable = 'false';
+      msg.style="";
       editPost(postNo, msg.innerText);
       this.innerHTML = "edit";
     }
-    // console.log(postNo);
-    // console.dir(this.parentElement.parentElement.outerText);
-    // $("p").replaceWith("<p> this is a test</p>")
   }
 
   Array.from(elements).forEach(element => {

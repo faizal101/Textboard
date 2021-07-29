@@ -17,6 +17,7 @@ div[id^="post-no-"] {
   display: grid;
   grid-template-rows: 15% auto auto;
   padding-left: 30px;
+  padding-right: 30px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.6);
   width: 50%;
@@ -33,7 +34,7 @@ div[id^="post-no-"] {
 
 .footer {
   display: grid;
-  grid-template-columns: 5% 5%;
+  grid-template-columns: 10% 10%;
   font-size: 16;
   font-weight: 300;
 }
