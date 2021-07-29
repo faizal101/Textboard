@@ -28,7 +28,7 @@ function formatPosts(post) {
   `<div id="post-no-${post.postID}" data-post-no="${post.postID}"></div>`
   document.getElementById(`post-no-${post.postID}`).innerHTML =
   `<div class="date"><p>Posted on: ${post.postDate}</p></div>
-  <div><p>${post.postText}</p></div>
+  <div><p id="msg-${post.postID}">${post.postText}</p></div>
   <div class="footer">
   <div class="edit">edit</div>
   </div>
@@ -63,6 +63,11 @@ function addEditPostsHandler() {
   let editPostNo = function() {
     const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
     console.log(postNo);
+    console.dir(this.parentElement.parentElement.outerText);
+    // $("p").replaceWith("<p> this is a test</p>")
+    document.getElementById(`msg-${postNo}`).parentElement.contentEditable = 'true';
+    document.getElementById(`msg-${postNo}`).parentElement.style="border:1px; border-style:solid; border-color:#000000;"
+    // $(`post-no-${postNo}.editable`).live;
   }
 
   Array.from(elements).forEach(element => {
