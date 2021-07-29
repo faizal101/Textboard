@@ -23,6 +23,17 @@ async function deletePost(post) {
   return await response.json();
 }
 
+async function editPost(postNo, newMsg) {
+  console.log(`post:${postNo}, msg:${newMsg}`)
+  const response = await fetch('/edit', {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({postNo, newMsg})
+  });
+}
+
 function formatPosts(post) {
   document.getElementById("posts").innerHTML +=
   `<div id="post-no-${post.postID}" data-post-no="${post.postID}"></div>`
@@ -62,12 +73,20 @@ function addEditPostsHandler() {
   let elements = document.getElementsByClassName("edit");
   let editPostNo = function() {
     const postNo = this.parentElement.parentElement.attributes["data-post-no"].value; // Might be a better way to do this?
-    console.log(postNo);
-    console.dir(this.parentElement.parentElement.outerText);
+    const msg = document.getElementById(`msg-${postNo}`).parentElement;
+    if (this.innerHTML == "edit") {
+      console.log(postNo);
+      msg.contentEditable = 'true';
+      msg.style="border:1px; border-style:solid; border-color:#000000;"
+      // $(`post-no-${postNo}.editable`).live;
+      this.innerHTML = "save";
+    } else {
+      editPost(postNo, msg.innerText);
+      this.innerHTML = "edit";
+    }
+    // console.log(postNo);
+    // console.dir(this.parentElement.parentElement.outerText);
     // $("p").replaceWith("<p> this is a test</p>")
-    document.getElementById(`msg-${postNo}`).parentElement.contentEditable = 'true';
-    document.getElementById(`msg-${postNo}`).parentElement.style="border:1px; border-style:solid; border-color:#000000;"
-    // $(`post-no-${postNo}.editable`).live;
   }
 
   Array.from(elements).forEach(element => {

@@ -50,11 +50,16 @@ app.post('/delete', (req, res) => {
     const statement = `DELETE FROM posts WHERE postID = ${req.body.post}`;
     con.query(statement, function (err) {
         if (err) throw err;
-    })
+    });
     res.status(200);
 });
 
 app.post('/edit', (req, res) => {
-    console.log(req.body.post);
+    console.log(req.body.postNo);
+    console.log(req.body.newMsg);
+    const statement = `UPDATE posts SET postText = '${req.body.newMsg}' WHERE postID = ${req.body.postNo}`;
+    con.query(statement, function (err) {
+        if (err) throw err
+    });
     res.status(200);
 })
