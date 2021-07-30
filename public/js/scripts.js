@@ -4,12 +4,24 @@ getPosts()
   }))
   .finally(() => addEventHandlers())
 
-let posts;
-
 async function getPosts() {
   const response = await fetch('/get');
   return await response.json();
 }
+
+$('#submitBtn').attr('disabled', true);
+
+console.log($('#msgBox').length)
+// if(!$('msgBox')) $('#submitBtn').attr('disabled', false);
+
+$(document).bind('keyup', function() {
+  console.log($('#msgBox').val().length)
+  if ($('#msgBox').val().length > 0) {
+    $('#submitBtn').attr('disabled', false)
+  } else {
+    $('#submitBtn').attr('disabled', true)
+  };
+})
 
 async function deletePost(post) {
   const response = await fetch('/delete', {
